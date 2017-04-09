@@ -19,25 +19,34 @@ UOpenDoor::UOpenDoor()
 void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
-    UE_LOG(LogTemp, Warning, TEXT("OpenDoor Component Loaded"));
-    
+    UE_LOG(LogTemp, Warning, TEXT("#####OpenDoor Component Loaded###########"));
+
+    ActorThatOpens = GetWorld() -> GetFirstPlayerController() -> GetPawn();
+}
+
+void UOpenDoor::OpenDoor()
+{
     //Find the owning actor
-    AActor* Owner = GetOwner();
-    
+    AActor *Owner = GetOwner();
+
     //Create the rotator
     FRotator NewRotation = FRotator(0.0f, -60.0f, 0.0f);
     //pitch front back, Yaw circular front back along the hinge point, Vertical Circle
-    
+
     //Set door rotation
     Owner->SetActorRotation(NewRotation);
 }
-
 
 // Called every frame
 void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+    //Poll the Trigger Volume
+    //If the ActorThatOpens is in the volume
+    if (PressurePlate -> IsOverlappingActor(ActorThatOpens))
+    {
+        OpenDoor();    
+    }    
 }
 
