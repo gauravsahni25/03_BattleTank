@@ -46,6 +46,7 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
     //If the ActorThatOpens is in the volume
     if (PressurePlate -> IsOverlappingActor(ActorThatOpens))
     {
+        UE_LOG(LogTemp, Warning, TEXT("Stepped on TriggerPlate"));
         OpenDoor();    
     }    
 }
