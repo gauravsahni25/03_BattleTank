@@ -11,3 +11,11 @@ BuildingEscape/Content
 contents.xcworkspacedata
 ####################
 BuildingEscape/.vscode
+BuildingEscape/.idea
+BuildingEscape/cmake-build-debug
+BuildingEscape/Config
+BuildingEscape/Plugins
+CMakeLists.txt
+BuildingEscapeCodeLitePreProcessor.txt
+BuildingEscapeCodeCompletionFolders.txt
+BuildingEscape.workspace
