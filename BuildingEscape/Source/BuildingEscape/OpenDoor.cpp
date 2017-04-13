@@ -20,7 +20,10 @@ void UOpenDoor::BeginPlay()
 	Super::BeginPlay();
     UE_LOG(LogTemp, Warning, TEXT("#####OpenDoor Component Loaded###########"));
 
+    //Gets the Asset to which this script component is attached to. 
     Owner = GetOwner();
+
+    //Gets the Default Pawn
     ActorThatOpens = GetWorld() -> GetFirstPlayerController() -> GetPawn();
 }
 
