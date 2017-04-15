@@ -2,7 +2,7 @@
 
 #include "BuildingEscape.h"
 #include "OpenDoor.h"
-
+#define OUT
 
 // Sets default values for this component's properties
 UOpenDoor::UOpenDoor()
@@ -10,21 +10,15 @@ UOpenDoor::UOpenDoor()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
 }
 
 // Called when the game starts
 void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
-    UE_LOG(LogTemp, Warning, TEXT("#####OpenDoor Component Loaded###########"));
 
     //Gets the Asset to which this script component is attached to. 
     Owner = GetOwner();
-
-    //Gets the Default Pawn
-    ActorThatOpens = GetWorld() -> GetFirstPlayerController() -> GetPawn();
 }
 
 void UOpenDoor::OpenDoor()
@@ -46,7 +40,7 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 
     //Poll the Trigger Volume
     //If the ActorThatOpens is in the volume
-    if (PressurePlate -> IsOverlappingActor(ActorThatOpens))
+    if (GetTotalMassOfActorOnPlate() > 50.f)
     {
         //UE_LOG(LogTemp, Warning, TEXT("Stepped on TriggerPlate"));
         OpenDoor();    
@@ -60,3 +54,14 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
     }  
 }
 
+float UOpenDoor::GetTotalMassOfActorOnPlate()
+{
+    float TotalMass = 0.f;
+
+    //Find all the overlapping actors
+    TArray<AActor*> OverlappingActors;
+    PressurePlate -> GetOverlappingActors(OUT OverlappingActors);
+
+    //Iterate through them adding their masses
+    return TotalMass;  
+}
