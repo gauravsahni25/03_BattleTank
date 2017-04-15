@@ -51,6 +51,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	if(!PhysicsHandle) { return; }
 	//if physics handle is attached 
 	if (PhysicsHandle -> GrabbedComponent)
 	{
@@ -77,6 +78,8 @@ void UGrabber::Grab()
 		//     FVector GrabLocation,
 		//     bool bConstrainRotation
 		// )
+        
+		if(!PhysicsHandle) { return; }
 		PhysicsHandle -> GrabComponent(
 			ComponentToGrab,
 			NAME_None, //Special Value, Enum for the bones, we used this value because we are not using Bones/ We are using Static Meshes in all cases so far
@@ -89,6 +92,8 @@ void UGrabber::Grab()
 void UGrabber::Release()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Grab Released"));
+
+	if(!PhysicsHandle) { return; }
 	PhysicsHandle -> ReleaseComponent();
 }
 

@@ -28,13 +28,13 @@ private:
     float OpenAngle = -90.0f;
     
     UPROPERTY(EditAnywhere)
-    ATriggerVolume* PressurePlate;
+    ATriggerVolume* PressurePlate = nullptr; // initialize with nullptr always 
 
 	UPROPERTY(EditAnywhere)
     float DoorCloseDelay = 1.0f;
 
 	float LastDoorOpenTime;
-    AActor* Owner; // The owning Actor
+    AActor* Owner = nullptr; // The owning Actor //  // Do NOT need to initialize with nullptr always because this is the owner of this script
     
     void OpenDoor();
 	void CloseDoor();
